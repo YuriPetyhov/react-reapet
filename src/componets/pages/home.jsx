@@ -5,7 +5,7 @@ import nextId from "../utils";
 
 
 export default () => {
-    const {show, hide} = useContext(AlertContext);
+    const {show, done} = useContext(AlertContext);
 
     const [toDos, setToDos] = useState([]);
     const [value, setValue] = useState('')
@@ -22,12 +22,25 @@ export default () => {
         // setTimeout(() => {
         //     hide()
         // }, 2000)
-    }
+    };
     const removeTodo = (e) => {
         let sortedArr = toDos.filter((item) => {
-            return item.id !== e.target.parentElement.parentElement.id
+            return item.id !== e.target.parentElement.id
         })
         setToDos(sortedArr)
+    };
+
+    const handleDone = (e) => {
+
+        let donedArr = toDos.map((item) => {
+            if (e.target.parentElement.id === item.id) {
+                return {...item, done: true}
+            }
+            return item
+        });
+
+        setToDos(donedArr);
+        done(value)
     }
     return (
         <>
@@ -41,7 +54,12 @@ export default () => {
                     value={value}
                 />
             </form>
-            <TodosList todos={toDos} removeTodo={removeTodo} />
+            <TodosList
+                todos={toDos}
+                removeTodo={removeTodo}
+                handleDone={handleDone}
+
+            />
 
         </>
     )

@@ -6,22 +6,29 @@ export const AlertState = ({children}) => {
     const [state, dispatch] = useReducer(AlertReducer, {visible: false});
 
     const show = (text) => {
-        console.log(text, 'text')
         dispatch({
             type: 'show',
-            payload: text
+            payload: {text: text, type: 'success'}
         })
     }
 
     const hide = () => {
         dispatch({
-            type: 'hide'
+            type: 'hide',
+        })
+    }
+
+    const done = (text) => {
+        dispatch({
+            type: 'done',
+            payload: {text: text, type: 'info'}
         })
     }
     return (
         <AlertContext.Provider value={{
             show,
             hide,
+            done,
             alert: state
         }}>
             {children}

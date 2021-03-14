@@ -19,10 +19,11 @@ code {
   justify-content: space-between;
   align-items: center;
 
-  .btns {
-    button:first-child {
-      margin-right: 5px;
-    }
+  .done {
+    text-decoration: line-through;
+  }
+   .btn-success {
+     margin-left: auto;
+   }
   }
 
-}
